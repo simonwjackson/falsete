@@ -1,0 +1,47 @@
+{
+  "name": "music-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next -p 30100",
+    "build": "next build",
+    "start": "next start -p 30100"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonwjackson/task-warrior-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simonwjackson/task-warrior-react/issues"
+  },
+  "homepage": "https://github.com/simonwjackson/task-warrior-react#readme",
+  "dependencies": {
+    "@cassette/hooks": "^2.0.0-beta.4",
+    "@cassette/player": "^2.0.0-beta.4",
+    "@material-ui/core": "^4.10.0",
+    "@material-ui/icons": "^4.9.1",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link-http": "^1.5.16",
+    "eslint-plugin-graphql": "^3.1.1",
+    "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.3.4",
+    "next-with-apollo": "^5.0.0",
+    "ramda": "^0.27.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-jinke-music-player": "^4.13.1",
+    "react-player": "^2.1.0"
+  },
+  "devDependencies": {
+    "@apollo/react-hooks": "^3.1.4",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0"
+  }
+}
