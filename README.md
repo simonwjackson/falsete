@@ -56,6 +56,3 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [Simon W. Jackson](https://github.com/simonwjackson).<br />
 This project is [MIT](https://github.com/simonwjackson/music-ui/blob/master/LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
