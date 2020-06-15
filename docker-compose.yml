@@ -1,21 +1,15 @@
 version: "3.7"
 services:
-  taskwarrior:
-    build:
-      context: .
-    user: "node"
+  "music-ui":
+    container_name: "music-ui"
+    image: "node:current-alpine"
+    # user: "node"
     working_dir: /home/node/app
-    container_name: taskwarrior
     environment:
-      - VIRTUAL_HOST=taskwarrior.*
+      - VIRTUAL_HOST=albums.*
       - TZ=America/Central
     volumes:
-      - /mnt/user/workstation/keys/task:/home/node/keys/task:ro
-      - /mnt/user/workstation/.local/share/task/hooks:/home/node/.task/hooks:ro
       - type: bind
-        source: /mnt/user/workstation/.config/task/rc
-        target: /home/node/.taskrc
-      - /mnt/user/code/github/simonwjackson/task-warrior-react:/home/node/app
-    ports:
-      - "3000:3000"
-    entrypoint: "/home/node/app/start.sh"
+        source: "${PWD}/start.sh"
+        target: /home/node/start.sh
+    command: "sh /home/node/start.sh"
