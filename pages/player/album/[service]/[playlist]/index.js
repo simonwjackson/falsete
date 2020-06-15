@@ -110,20 +110,13 @@ const Album = () => {
       )(youtubePlaylist)
   }, [setPlaylist, youtubePlaylistId, error, called, loading, youtubePlaylist])
 
-  if (loading) 
-    return <p>Loading...</p>
+  // if (loading)
+  //   return <p>Loading...</p>
 
   if (error) 
     return <p>Error: {JSON.stringify(error)}</p>
 
   const list = pathOr([], ['youtubePlaylist', 'items'], youtubePlaylist)
-
-  console.log (
-    currentTime,
-    currentAlbumTime, 
-    totalTime,
-    currentAlbumTime / totalTime * 100
-  )
 
   return <AlbumView 
     onTogglePause={togglePause}
