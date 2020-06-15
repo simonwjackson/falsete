@@ -132,19 +132,25 @@ const albumList = [
   },
 ]
 
+const serialize = (obj) => {
+  var str = []
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) 
+      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
+              
+  return str.join('&')
+}
+
 const SimpleList = ({ list }) =>  {
   const classes = useStyles()
 
   return (
     <List>
-      {list.map(item => ( 
-        <Link 
-          href={{ 
-            pathname: '/player/album/[service]/[playlist]', 
-            query: { ...item } 
-          }} 
-          as={`/player/album/${item.service}/${item.id}`}
-        > 
+      {list.map(item => { 
+        return <Link
+          href={`/player/album/[service]/[playlist]?${serialize(item)}`}
+          as={`/player/album/${item.service}/${item.id}?${serialize(item)}`}
+        >
           <ListItem alignItems="flex-start" key={item.id}>
             <ListItemAvatar>
               <Avatar alt={item.title} src={item.art} />
@@ -155,7 +161,7 @@ const SimpleList = ({ list }) =>  {
             />
           </ListItem> 
         </Link>
-      ))}
+      })}
     </List>
   )
 }

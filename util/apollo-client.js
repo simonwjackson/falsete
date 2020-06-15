@@ -3,9 +3,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import withApollo from 'next-with-apollo'
 import { createHttpLink } from 'apollo-link-http'
 import fetch from 'isomorphic-unfetch'
+import getConfig from 'next/config'
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { publicRuntimeConfig } = getConfig()
 
 // Update the GraphQL endpoint to any instance of GraphQL that you like
-const GRAPHQL_URL = 'http://192.168.100.2:30000'
+const GRAPHQL_URL = `http://${publicRuntimeConfig.SERVER}:${publicRuntimeConfig.PORT}`
 
 const link = createHttpLink({
   fetch, // Switches between unfetch & node-fetch for client & server.
