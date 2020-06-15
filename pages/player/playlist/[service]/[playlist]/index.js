@@ -27,16 +27,7 @@ const youtube2playlist = (list) => {
   }))
 }
 
-const PlaylistView = ({ 
-  activeTrackIndex, 
-  onSelectTrackIndex, 
-  onTogglePause, 
-  list, 
-  art, 
-  paused 
-}) => {
-  return (
-    <>
+/*
       <Box
         display="flex"
         flexDirection="column"
@@ -62,6 +53,7 @@ const PlaylistView = ({
           />
         )}
       </Box>
+
       <Box
         display="flex"
         flexDirection="column"
@@ -70,22 +62,31 @@ const PlaylistView = ({
         width={1}
         style={{ maxHeight: '100%', overflow: 'auto' }}
       >
-        <List dense>
-          {list.map((item , i) => (
-            <ListItem
-              selected={activeTrackIndex === i}
-              onClick={() => onSelectTrackIndex(i)}
-              key={item.url}
-            >
-              <ListItemAvatar>      
-                <ListItemText primary={i + 1} />
-              </ListItemAvatar>
-              <ListItemText primary={item.title} />
-            </ListItem>
-          ))} 
-        </List> 
-      </Box> 
-    </>
+*/
+
+const PlaylistView = ({ 
+  activeTrackIndex, 
+  onSelectTrackIndex, 
+  onTogglePause, 
+  list, 
+  art, 
+  paused 
+}) => {
+  return (
+    <List dense>
+      {list.map((item , i) => (
+        <ListItem
+          selected={activeTrackIndex === i}
+          onClick={() => onSelectTrackIndex(i)}
+          key={item.url}
+        >
+          <ListItemAvatar>      
+            <ListItemText primary={i + 1} />
+          </ListItemAvatar>
+          <ListItemText primary={item.title} />
+        </ListItem>
+      ))} 
+    </List> 
   )
 }
 
