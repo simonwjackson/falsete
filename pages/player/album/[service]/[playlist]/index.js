@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Paper } from '@material-ui/core'
 import { PauseCircleFilled, PlayCircleFilled } from '@material-ui/icons'
-import { take, divide, add, map, sum, pathOr, find, path, pipe } from 'ramda'
+import { take, divide, add, map, sum, pathOr, find, path } from 'ramda'
 import { usePlayerContext } from '@cassette/hooks'
 import { useRouter } from 'next/router'
 import Box from '@material-ui/core/Box'
@@ -82,21 +82,23 @@ const Album = () => {
     { variables: { id: youtubePlaylistId } }
   )
 
-  const currentAlbumTime = pipe(
-    pathOr([], ['youtubePlaylist', 'items']), 
-    take(activeTrackIndex),
-    map(path(['formats', 'approxDurationMs'])),
-    map(Number),
-    sum,
-    add(currentTime * 1000)
-  )(youtubePlaylist)
+  const currentAlbumTime = 
+		youtubePlaylist
+			|> pathOr([], ['youtubePlaylist', 'items'], #)
+			|> take(activeTrackIndex, #)
+			|> map(path(['formats', 'approxDurationMs']))(#)
+			|> map(Number, #)
+			|> sum(#)
+			|> add(currentTime * 1000, #)
 
-  const totalTime = pipe(
-    pathOr([], ['youtubePlaylist', 'items']), 
-    map(path(['formats', 0, 'approxDurationMs'])),
-    map(Number),
-    sum,
-  )(youtubePlaylist)
+  const totalTime = 
+		youtubePlaylist 
+			|> pathOr([], ['youtubePlaylist', 'items'], #)
+			|> map(path(['formats', 0, 'approxDurationMs']))(#)
+			|> map(Number,  #)
+			|> sum(#)
+
+	console.log(currentAlbumTime, totalTime)
 
   useMemo(() => {
     if (youtubePlaylistId && !called) 
