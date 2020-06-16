@@ -35,29 +35,26 @@ const AlbumView = ({
   return (
     <Grid 
       direction='column'
+      // wrap='nowrap'
       container 
       style={{
         height:'100%',
       }}
     >
-      <Grid item>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          width={1}
-          py={5}
-        >
-          <img
-            style={{ 
-              objectFit: 'cover',
-              width: '75%',
-              objectPosition: 'center',
-            }}
-            src={art}
-          />
-        </Box>
+      <Grid item
+        style={{ 
+          textAlign: 'center',
+          margin: '50px',
+          maxHeight: '50vh'
+        }} 
+      >
+        <img
+          style={{ 
+            maxHeight: '100%',
+            maxWidth: '100%'
+          }}
+          src={art}
+        />
       </Grid>
       <Grid 
         container 
