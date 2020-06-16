@@ -102,12 +102,12 @@ const Album = () => {
     if (youtubePlaylistId && !called) 
       loadYoutubePlaylist()
     
-    if (youtubePlaylistId && called && !error && !loading) 
-      pipe(
-        pathOr([], ['youtubePlaylist', 'items']),
-        youtube2playlist,
-        setPlaylist
-      )(youtubePlaylist)
+    if (youtubePlaylistId && called && !error && !loading) {
+      youtubePlaylist
+        |> pathOr([], ['youtubePlaylist', 'items'], #)
+        |> youtube2playlist(#)
+        |> setPlaylist(#)
+    }
   }, [setPlaylist, youtubePlaylistId, error, called, loading, youtubePlaylist])
 
   // if (loading)
