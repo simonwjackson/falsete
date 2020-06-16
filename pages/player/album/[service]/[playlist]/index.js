@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Paper } from '@material-ui/core'
 import { PauseCircleFilled, PlayCircleFilled } from '@material-ui/icons'
-import { take, divide, add, map, sum, pathOr, find, path } from 'ramda'
+import { take, divide, add, map, uncurryN, sum, pathOr, find, path } from 'ramda'
 import { usePlayerContext } from '@cassette/hooks'
 import { useRouter } from 'next/router'
 import Box from '@material-ui/core/Box'
@@ -12,6 +12,35 @@ import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
 import AlbumView from '../../../../../components/AlbumView/AlbumView'
 import { AppContext } from '../../../../_app'
+
+const YOUTUBE_PLAYLIST = gql`
+	query youtubePlaylist($id: ID!) {
+		youtubePlaylist(id: $id) {
+			id
+			total_items
+			items {
+				thumbnail
+				url
+				title
+				formats(
+					limit: 1
+					type: "audio"
+					sort: { field: "audioBitrate", order: DESC }
+				) {
+					mimeType
+					url
+					audioBitrate
+					audioQuality
+					audioChannels
+					approxDurationMs
+					audioSampleRate
+					bitrate
+					container
+				}
+			}
+		}
+	}
+`
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +52,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const youtube2playlist = (list) => {
-  return list.map(item => ({
-    title: item.title,
-    url: item.formats[0].url
-  }))
-}
+const youtube2playlist = map(item => ({
+	title: item.title,
+	url: item.formats[0].url
+})) 
+
+const getCurrentAlbumTime = uncurryN(3, playlist => active => time =>
+	playlist
+		|> pathOr([], ['youtubePlaylist', 'items'], #)
+		|> take(active, #)
+		|> map(path(['formats', 'approxDurationMs']), #)
+		|> map(Number, #)
+		|> sum(#)
+		|> add(time * 1000, #)
+)
+
+const getTotalTime = playlist =>
+	playlist 
+		|> pathOr([], ['youtubePlaylist', 'items'], #)
+		|> map(path(['formats', 0, 'approxDurationMs']), #)
+		|> map(Number,  #)
+		|> sum(#) 
 
 const Album = () => { 
   const router = useRouter() 
@@ -46,59 +90,12 @@ const Album = () => {
     return activeTrackIndex >= 0
       ? onTogglePause()
       : onSelectTrackIndex(0) 
-  }
-
-  const YOUTUBE_PLAYLIST = gql`
-    query youtubePlaylist($id: ID!) {
-      youtubePlaylist(id: $id) {
-        id
-        total_items
-        items {
-          thumbnail
-          url
-          title
-          formats(
-            limit: 1
-            type: "audio"
-            sort: { field: "audioBitrate", order: DESC }
-          ) {
-            mimeType
-            url
-            audioBitrate
-            audioQuality
-            audioChannels
-            approxDurationMs
-            audioSampleRate
-            bitrate
-            container
-          }
-        }
-      }
-    }
-  `
+  } 
 
   const [loadYoutubePlaylist, { error, called, loading, data: youtubePlaylist }] = useLazyQuery(
     YOUTUBE_PLAYLIST,
     { variables: { id: youtubePlaylistId } }
   )
-
-  const currentAlbumTime = 
-		youtubePlaylist
-			|> pathOr([], ['youtubePlaylist', 'items'], #)
-			|> take(activeTrackIndex, #)
-			|> map(path(['formats', 'approxDurationMs']))(#)
-			|> map(Number, #)
-			|> sum(#)
-			|> add(currentTime * 1000, #)
-
-  const totalTime = 
-		youtubePlaylist 
-			|> pathOr([], ['youtubePlaylist', 'items'], #)
-			|> map(path(['formats', 0, 'approxDurationMs']))(#)
-			|> map(Number,  #)
-			|> sum(#)
-
-	console.log(currentAlbumTime, totalTime)
 
   useMemo(() => {
     if (youtubePlaylistId && !called) 
@@ -119,16 +116,19 @@ const Album = () => {
     return <p>Error: {JSON.stringify(error)}</p>
 
   const list = pathOr([], ['youtubePlaylist', 'items'], youtubePlaylist)
+const progress = getCurrentAlbumTime(youtubePlaylist, activeTrackIndex, currentTime)
+const playtime = getTotalTime(youtubePlaylist)
 
-  return <AlbumView 
-    onTogglePause={togglePause}
-    title={title}
-    artist={artist}
-    release={release}
-    progress={currentAlbumTime}
-    playtime={totalTime}
-    paused={paused}
-    art={art}
+  return <AlbumView {...{
+			onTogglePause: togglePause,
+			title,
+			artist,
+			release,
+			progress,
+			playtime,
+			paused,
+			art
+		}}
   /> 
 }
 
