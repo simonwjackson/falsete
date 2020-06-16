@@ -116,8 +116,8 @@ const Album = () => {
     return <p>Error: {JSON.stringify(error)}</p>
 
   const list = pathOr([], ['youtubePlaylist', 'items'], youtubePlaylist)
-const progress = getCurrentAlbumTime(youtubePlaylist, activeTrackIndex, currentTime)
-const playtime = getTotalTime(youtubePlaylist)
+	const progress = getCurrentAlbumTime(youtubePlaylist, activeTrackIndex, currentTime)
+	const playtime = getTotalTime(youtubePlaylist)
 
   return <AlbumView {...{
 			onTogglePause: togglePause,

@@ -59,50 +59,50 @@ const AlbumView = ({
           />
         </Box>
       </Grid>
-      <Grid item>
-        <Grid container spacing={3}>
-          <Grid item 
-            style={{
-              flexGrow: 1,
-              textAlign: 'center'
-            }}>{artist}</Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          <Grid item 
-            style={{
-              flexGrow: 1,
-              textAlign: 'center'
-            }}>
+      <Grid 
+        container 
+        direction="column"
+        spacing={3} 
+        style={{
+          margin: 0,
+          width: '100%',
+        }}
+      >
+        <Grid item
+          style={{
+            flexGrow: 1,
+            textAlign: 'center'
+          }}>{artist}</Grid>
+        <Grid item 
+          style={{
+            flexGrow: 1,
+            textAlign: 'center'
+          }}>
 
-            <Box
-              margin={'auto'}
-              width={.5}
-            >
-              <LinearProgress 
-                classes={{
-                  root: classes.progress
-                }}
-                variant="determinate"
-                value={progessBar} 
-                color="secondary"
-              />
-            </Box>
-          </Grid>
+          <Box
+            margin={'auto'}
+            width={.5}
+          >
+            <LinearProgress 
+              classes={{
+                root: classes.progress
+              }}
+              variant="determinate"
+              value={progessBar} 
+              color="secondary"
+            />
+          </Box>
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item 
-            style={{
-              flexGrow: 1,
-              textAlign: 'center'
-            }}>{title}</Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item 
-            style={{
-              flexGrow: 1,
-              textAlign: 'center'
-            }}>{release}</Grid>
-        </Grid>
+        <Grid item 
+          style={{
+            flexGrow: 1,
+            textAlign: 'center'
+          }}>{title}</Grid>
+        <Grid item 
+          style={{
+            flexGrow: 1,
+            textAlign: 'center'
+          }}>{release}</Grid>
       </Grid>
       <Grid
         item
