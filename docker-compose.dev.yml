@@ -1,0 +1,18 @@
+---
+version: "3.7"
+
+services: 
+  app:
+    image: "node:current-alpine"
+    environment:
+      - NODE_ENV=development
+    working_dir: /home/node/app
+    volumes:
+      - .:/home/node/app:consistent
+      - ./node_modules:/home/node/app/node_modules:delegated
+    ports:
+      - 3000:3000
+    environment:
+      - SERVER=$SERVER
+      - PORT=$PORT
+    entrypoint: "npm"
