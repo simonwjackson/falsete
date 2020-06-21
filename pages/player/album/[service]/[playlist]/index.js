@@ -13,33 +13,35 @@ import { makeStyles } from '@material-ui/core/styles'
 import AlbumView from '../../../../../components/AlbumView/AlbumView'
 import { AppContext } from '../../../../_app'
 
+
+
 const YOUTUBE_PLAYLIST = gql`
-	query youtubePlaylist($id: ID!) {
-		youtubePlaylist(id: $id) {
-			id
-			total_items
-			items {
-				thumbnail
-				url
-				title
-				formats(
-					limit: 1
-					type: "audio"
-					sort: { field: "audioBitrate", order: DESC }
-				) {
-					mimeType
-					url
-					audioBitrate
-					audioQuality
-					audioChannels
-					approxDurationMs
-					audioSampleRate
-					bitrate
-					container
-				}
-			}
-		}
-	}
+  query youtubePlaylist($id: ID!) {
+    youtubePlaylist(id: $id) {
+      id
+      total_items
+      items {
+        thumbnail
+        url
+        title
+        formats(
+          limit: 1
+          type: "audio"
+          sort: { field: "audioBitrate", order: DESC }
+        ) {
+          mimeType
+          url
+          audioBitrate
+          audioQuality
+          audioChannels
+          approxDurationMs
+          audioSampleRate
+          bitrate
+          container
+        }
+      }
+    }
+  }
 `
 
 const useStyles = makeStyles((theme) => ({
@@ -53,26 +55,26 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const youtube2playlist = map(item => ({
-	title: item.title,
-	url: item.formats[0].url
+  title: item.title,
+  url: item.formats[0].url
 })) 
 
 const getCurrentAlbumTime = uncurryN(3, playlist => active => time =>
-	playlist
-		|> pathOr([], ['youtubePlaylist', 'items'], #)
-		|> take(active, #)
-		|> map(path(['formats', 'approxDurationMs']), #)
-		|> map(Number, #)
-		|> sum(#)
-		|> add(time * 1000, #)
+  playlist
+    |> pathOr([], ['youtubePlaylist', 'items'], #)
+    |> take(active, #)
+    |> map(path(['formats', 'approxDurationMs']), #)
+    |> map(Number, #)
+    |> sum(#)
+    |> add(time * 1000, #)
 )
 
 const getTotalTime = playlist =>
-	playlist 
-		|> pathOr([], ['youtubePlaylist', 'items'], #)
-		|> map(path(['formats', 0, 'approxDurationMs']), #)
-		|> map(Number,  #)
-		|> sum(#) 
+  playlist 
+    |> pathOr([], ['youtubePlaylist', 'items'], #)
+    |> map(path(['formats', 0, 'approxDurationMs']), #)
+    |> map(Number,  #)
+    |> sum(#) 
 
 const Album = () => { 
   const router = useRouter() 
@@ -116,19 +118,19 @@ const Album = () => {
     return <p>Error: {JSON.stringify(error)}</p>
 
   const list = pathOr([], ['youtubePlaylist', 'items'], youtubePlaylist)
-	const progress = getCurrentAlbumTime(youtubePlaylist, activeTrackIndex, currentTime)
-	const playtime = getTotalTime(youtubePlaylist)
+  const progress = getCurrentAlbumTime(youtubePlaylist, activeTrackIndex, currentTime)
+  const playtime = getTotalTime(youtubePlaylist)
 
   return <AlbumView {...{
-			onTogglePause: togglePause,
-			title,
-			artist,
-			release,
-			progress,
-			playtime,
-			paused,
-			art
-		}}
+    onTogglePause: togglePause,
+    title,
+    artist,
+    release,
+    progress,
+    playtime,
+    paused,
+    art
+  }}
   /> 
 }
 

@@ -35,7 +35,6 @@ const AlbumView = ({
   return (
     <Grid 
       direction='column'
-      // wrap='nowrap'
       container 
       style={{
         height:'100%',
