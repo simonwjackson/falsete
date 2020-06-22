@@ -9,7 +9,7 @@ import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
 // Update the GraphQL endpoint to any instance of GraphQL that you like
-const GRAPHQL_URL = `http://${publicRuntimeConfig.SERVER}:${publicRuntimeConfig.PORT}`
+const GRAPHQL_URL = `http://${publicRuntimeConfig.API_HOST}:${publicRuntimeConfig.API_PORT}`
 
 const link = createHttpLink({
   fetch, // Switches between unfetch & node-fetch for client & server.
