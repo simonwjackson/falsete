@@ -7,7 +7,8 @@
     "dev": "concurrently \"npm:dev:*\"",
     "build": "next build",
     "start": "next start -p 3000",
-    "dev:next": "next -p 3000"
+    "dev:next": "next -p 3000",
+    "dev:test": "cypress run"
   },
   "keywords": [],
   "author": "",
@@ -35,10 +36,11 @@
     "react-player": "^2.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^11.0.0-beta.0",
     "@apollo/react-hooks": "^3.1.4",
     "@babel/plugin-proposal-pipeline-operator": "^7.10.1",
     "@babel/plugin-transform-runtime": "^7.10.1",
+    "babel-eslint": "^11.0.0-beta.0",
+    "cypress": "^4.8.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0"
   }
