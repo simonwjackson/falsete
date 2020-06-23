@@ -1,14 +1,14 @@
-<h1 align="center">Welcome to music-ui 👋</h1>
+<h1 align="center">Welcome to falsete 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/simonwjackson/music-ui#readme" target="_blank">
+  <a href="https://github.com/simonwjackson/falsete#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/simonwjackson/music-ui/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/simonwjackson/falsete/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/simonwjackson/music-ui/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/simonwjackson/music-ui" />
+  <a href="https://github.com/simonwjackson/falsete/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/simonwjackson/falsete" />
   </a>
   <a href="https://twitter.com/simonwjackson" target="_blank">
     <img alt="Twitter: simonwjackson" src="https://img.shields.io/twitter/follow/simonwjackson.svg?style=social" />
@@ -17,7 +17,7 @@
 
 > A cloud music player
 
-### 🏠 [Homepage](https://github.com/simonwjackson/music-ui#readme)
+### 🏠 [Homepage](https://github.com/simonwjackson/falsete#readme)
 
 ## Install
 
@@ -42,7 +42,7 @@ npm run start
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/simonwjackson/music-ui/issues). You can also take a look at the [contributing guide](https://github.com/simonwjackson/music-ui/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/simonwjackson/falsete/issues). You can also take a look at the [contributing guide](https://github.com/simonwjackson/falsete/blob/master/CONTRIBUTING.md).
 
 ## Show your support
 
@@ -55,4 +55,4 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2020 [Simon W. Jackson](https://github.com/simonwjackson).<br />
-This project is [MIT](https://github.com/simonwjackson/music-ui/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/simonwjackson/falsete/blob/master/LICENSE) licensed.

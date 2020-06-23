@@ -22,9 +22,6 @@ services:
       - cache:/root/.cache
       - ./node_modules:/home/node/app/node_modules:delegated
       - .:/home/node/app:consistent
-    environment:
-      - API_HOST=$API_HOST
-      - API_PORT=$API_PORT
     entrypoint: "./node_modules/.bin/cypress"
 
 volumes:

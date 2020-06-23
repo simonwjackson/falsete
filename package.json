@@ -1,14 +1,14 @@
 {
-  "name": "music-ui",
-  "version": "1.0.0",
+  "name": "falsete",
+  "version": "20.06.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm:dev:*\"",
+    "dev": "next -p 3000",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start -p 3000",
-    "dev:next": "next -p 3000",
-    "dev:test": "cypress run"
+    "test": "cypress run"
   },
   "keywords": [],
   "author": "",
