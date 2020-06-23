@@ -1,7 +1,7 @@
 # next.js build output
 .next
 public/sw.js*
-public/workbox-*.js
+public/workbox-*.js*
 out
 
 # dotenv environment variables file (build for Zeit Now)

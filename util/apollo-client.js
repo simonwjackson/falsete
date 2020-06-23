@@ -4,12 +4,16 @@ import withApollo from 'next-with-apollo'
 import { createHttpLink } from 'apollo-link-http'
 import fetch from 'isomorphic-unfetch'
 import getConfig from 'next/config'
+import { path } from 'ramda'
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { publicRuntimeConfig } = getConfig()
 
+const host = path(['API_HOST'], publicRuntimeConfig)
+const port = path(['API_PORT'], publicRuntimeConfig)
+
 // Update the GraphQL endpoint to any instance of GraphQL that you like
-const GRAPHQL_URL = `http://${publicRuntimeConfig.API_HOST}:${publicRuntimeConfig.API_PORT}`
+const GRAPHQL_URL = `http://${host}:${port}`
 
 const link = createHttpLink({
   fetch, // Switches between unfetch & node-fetch for client & server.
