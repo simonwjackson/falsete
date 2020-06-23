@@ -27,9 +27,34 @@ npm install
 
 ## Usage
 
+### Docker
+
 ```sh
-npm run start
+docker run \
+  --tty # Important \
+  -p 8080:80 \
+  simonwjackson/falsete:latest
 ```
+
+Then visit [http://localhost:8080]()
+
+### Docker Compose
+
+**docker-compose.yml**
+```yaml
+version: '3.3'
+services:
+  falsete:
+    image: 'simonwjackson/falsete:latest'
+    ports:
+      - '8080:80'
+```
+
+```bash
+docker-compose up
+```
+
+Then visit [http://localhost:8080]()
 
 ## Author
 
