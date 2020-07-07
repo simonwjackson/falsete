@@ -14,6 +14,7 @@ import Head from 'next/head'
 import { ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ApolloProvider } from '@apollo/react-hooks'
+import withAuth from '../components/withAuth'
 
 import '@cassette/player/dist/css/cassette-player.css'
 
@@ -21,6 +22,7 @@ import theme from '../src/theme'
 import withData from '../util/apollo-client' 
 
 export const AppContext = createContext()
+
 const AppContextProvider = (props) => {
   const [ playlist, setPlaylist ] = useState([])
 
@@ -31,7 +33,7 @@ const AppContextProvider = (props) => {
   )
 }  
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     background: 'radial-gradient(ellipse at center, #070F26 0%, #070F26 30%, rgb(0, 0, 0) 100%)',
     color: '#ffffff'
@@ -59,8 +61,10 @@ function ButtonAppBar() {
 }
 
 function MyApp(props) {
-  const { Component, pageProps, apollo } = props
+  const { pageProps, apollo } = props
   const classes = useStyles()
+
+  const Component = withAuth(props.Component)
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
